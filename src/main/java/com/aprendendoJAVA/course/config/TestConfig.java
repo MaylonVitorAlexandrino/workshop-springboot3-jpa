@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.aprendendoJAVA.course.entities.Category;
 import com.aprendendoJAVA.course.entities.Order;
+import com.aprendendoJAVA.course.entities.OrderItem;
 import com.aprendendoJAVA.course.entities.Product;
 import com.aprendendoJAVA.course.entities.User;
 import com.aprendendoJAVA.course.entities.enums.OrderStatus;
 import com.aprendendoJAVA.course.repositories.CategoryRepository;
+import com.aprendendoJAVA.course.repositories.OrderItemRepository;
 import com.aprendendoJAVA.course.repositories.OrderRepository;
 import com.aprendendoJAVA.course.repositories.ProductRepository;
 import com.aprendendoJAVA.course.repositories.UserRepository;
@@ -33,6 +35,9 @@ public CategoryRepository categoryRepository;
 
 @Autowired
 public OrderRepository orderRepository;
+
+@Autowired
+public OrderItemRepository orderItemRepository;
 
 @Override
 public void run(String... args) throws Exception {
@@ -67,7 +72,13 @@ public void run(String... args) throws Exception {
 	
 	userRepository.saveAll(Arrays.asList(u1, u2));
 	orderRepository.saveAll(Arrays.asList(o1,o2,o3));
-
+	
+	OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+	OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+	OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+	OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice()); 
+	
+	orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 }
 
 }
